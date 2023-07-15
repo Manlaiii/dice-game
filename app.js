@@ -1,20 +1,38 @@
-// Тоглогчийн ээлжийг хадгалдаг хувьсагч, 1-р тоглогч 0, 2-р тоглогч 1
-var activePlayer = 0;
-
-// Тоглогчдын цуглуулсан оноог хадгалах хувьсагч
-var scores = [0, 0];
-
-// Тоглогчийн ээлжиндээ цуглуулж байгаа оноог хадгалдаг хувьсагч
-var roundScore = 0;
-
-// Програм эхлэхэд бэлдэх
-document.getElementById("score-0").textContent = "0";
-document.getElementById("score-1").textContent = "0";
-document.getElementById("current-0").textContent = "0";
-document.getElementById("current-1").textContent = "0";
-
+// Бүх глобаль хувьсагчид
+var activePlayer, scores, roundScore;
 var diceDom = document.querySelector(".dice");
-diceDom.style.display = "none";
+
+// Тоглоомыг эхлүүлнэ
+initGame();
+
+// Тоглоомыг шинээр эхлэхэд бэлдэх
+function initGame() {
+	// Тоглогчийн ээлжийг хадгалдаг хувьсагч, 1-р тоглогч 0, 2-р тоглогч 1
+	activePlayer = 0;
+	// Тоглогчдын цуглуулсан оноог хадгалах хувьсагч
+	scores = [0, 0];
+	// Тоглогчийн ээлжиндээ цуглуулж байгаа оноог хадгалдаг хувьсагч
+	roundScore = 0;
+
+	document.getElementById("score-0").textContent = "0";
+	document.getElementById("score-1").textContent = "0";
+	document.getElementById("current-0").textContent = "0";
+	document.getElementById("current-1").textContent = "0";
+
+	// Тоглогчдын нэрийг буцааж гаргах
+	document.getElementById("name-0").textContent = "Player 1";
+	document.getElementById("name-1").textContent = "Player 2";
+
+	document.querySelector(".player-0-panel").classList.remove("winner");
+	document.querySelector(".player-1-panel").classList.remove("winner");
+
+	document.querySelector(".player-0-panel").classList.remove("active");
+	document.querySelector(".player-1-panel").classList.remove("active");
+
+	document.querySelector(".player-0-panel").classList.add("active");
+
+	diceDom.style.display = "none";
+}
 
 // Шоог шидэх эвент листенер
 document.querySelector(".btn-roll").addEventListener("click", function() {
@@ -66,3 +84,6 @@ function switchToNextPlayer() {
 	// Шоог түр алга болгоно
 	diceDom.style.display = "none";
 }
+
+// New Game товчны эвент листенер
+document.querySelector(".btn-new").addEventListener("click", initGame);
